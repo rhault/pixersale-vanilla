@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --black: #000000;
+            --very-light-pink: #C7C7C7;
+            --text-input-field: #F7F7F7;
+            --hospital-green: #ACD9B2;
+            --sm: 16px;
+            --md: 18px;
+            --lg: 20px
+        }
+
+        body{
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+        }
+
+        .title {
+            font-size: var(--lg);
+            margin-bottom: 60px;
+        }
+
+        .my-order{
+            display: grid;
+            height: 100vh;
+            place-items: center;
+            width: 100%;
+
+        }
+
+        .my-order-container{
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            width: 450px;
+        }
+
+        .my-order-content{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .order{
+            align-items: center;
+            background-color: var(--text-input-field);
+            border-radius: 8;
+            display: grid;
+            gap: 16px;
+            grid-template-columns: auto 1fr;
+            margin-bottom: 24px;
+            padding: 0 24px;
+        }
+
+        .order p:nth-child(1){
+            display: flex;
+            flex-direction: column;
+        }
+
+        .order p span:nth-child(1){
+            font-weight: bold;
+            font-size: var(--md);
+        }
+
+        .order p span:nth-child(2){
+            color: var(--very-light-pink);
+            font-size: var(--sm);
+        }
+
+        .order p:nth-child(2){
+            font-weight: bold;
+            text-align: end;
+        }
+
+        .shopping-cart{
+            align-items: center;
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .shopping-cart figure{
+            margin: 0;
+        }
+
+        .shopping-cart figure img{
+            border-radius: 10px;
+            height: 80px;
+            width: 80px;
+        }
+
+        .shopping-cart p:nth-child(2){
+            color: var(--very-light-pink);
+        }
+
+        .shopping-cart p:nth-child(3){
+            font-weight: bold;
+            font-size: var(--md);
+        }
+    </style>
+</head>
+<body>
+    <div class="my-order">
+        <div class="my-order-container">
+            <h1 class="title">My order</h1>
+            
+            <div class="my-order-content">
+                <div class="order">
+                    <p>
+                        <span>03.25.21</span>
+                        <span>6 articles</span>
+                    </p>
+                    <p>$560.00</p>
+                </div>
+                <div class="shopping-cart">
+                    <figure>
+                        <img src="./img/Computer.jpg"" alt="">
+                    </figure>
+                    <p>Computer</p>
+                    <p>$50</p>
+                </div>
+                <div class="shopping-cart">
+                    <figure>
+                        <img src="./img/Computer.jpg"" alt="">
+                    </figure>
+                    <p>Computer</p>
+                    <p>$50</p>
+                </div>
+                <div class="shopping-cart">
+                    <figure>
+                        <img src="./img/Computer.jpg"" alt="">
+                    </figure>
+                    <p>Computer</p>
+                    <p>$50</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
