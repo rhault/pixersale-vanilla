@@ -38,20 +38,31 @@ mobileMenuButton.addEventListener('click', () => {togglElement(mobileMenu, [prod
 adds attributes to it, and optionally adds content to it.
 - element: the tag of the new HTML element to be created.
 - attributes: an object{} containing the attributes and their respective values to be added to the new element.
-- content: the content to be added to the new element.
+- nodes: the content to be added to the new element.
 */
-const createElement = (element, attributes, content) => {
+const createElement = (element, attributes = {}, ...nodes) => {
     const newElement = document.createElement(element);
     
-    if (attributes){
-        for(const attribute in attributes){        
-            if(attributes.hasOwnProperty(attribute)) 
-                newElement.setAttribute(attribute, attributes[attribute]);
-        }
-    } 
-    if(content) newElement.append(content)
+    Object.entries(attributes).forEach(([key, value]) => {
+        newElement.setAttribute(key, value);
+    }) 
+    
+    for(const node of nodes){
+        newElement.append(node);
+    }
 
     return newElement
 }
 
+const products = [{name:computer, price:300, img:"https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}];
+
+for(const product of products){
+    const {name, price, img} = product;
+
+    const productName = createElement('p', name);
+    const productPrice = createElement('p', price);
+    const productImg = createElement('img',{src:img});
+    
+        
+}
 
