@@ -194,13 +194,21 @@ nav{
     display: flex;
 }
 
-.title-container img{
-    cursor: pointer;
-    margin-right: 14px;
+.title-container img:nth-child(1){
     transform: rotate(180deg);
 }
 
-.title {
+.title-container img{
+    align-self: center;
+    background-color: var(--white);
+    border-radius: 50%;
+    cursor: pointer;
+    height: 14px;
+    margin-right: 14px;
+    width: 14px;
+} 
+
+.aside-title {
     font-size: var(--lg);
     font-weight: bold;
 }
