@@ -11,6 +11,8 @@ const cardContainer = document.querySelector('.cards-container');
 const iconArrow = document.querySelector('.icon-arrow');
 const iconClose = document.querySelector('.icone-close');
 const asideTitle =  document.querySelector('.aside-title');
+const asideProductInfo =  document.querySelector('.aside-product-info');
+const productOrder =  document.querySelector('.my-order-content');
 
 const CLASS_HIDDEN = 'hidden';
 
@@ -21,12 +23,12 @@ contains the 'hidden' class. If the element does not contain the class,
 the function adds the 'hidden' class to it.*/
 
 const isHiddenElemnets = (elements) => {
-    console.log(elements)
     
     for (const key in elements) {
         if (Object.hasOwnProperty.call(elements, key)) {
             const element = elements[key];
             const isHiddenElement = element.classList.contains(CLASS_HIDDEN);
+            console.log(isHiddenElement)
 
             if(!isHiddenElement) element.classList.add(CLASS_HIDDEN);     
         }
@@ -44,7 +46,15 @@ const togglElement = (showElements, ...hiddenElement) => {
 
 //Events buttons
 navbarEmailButton.addEventListener('click', () => {togglElement([desktopMenu], productDetail)});
-navbarShoppingCardButton.addEventListener('click', () => {togglElement([productDetail, iconArrow, asideTitle], mobileMenu, desktopMenu, iconClose)});
+navbarShoppingCardButton.addEventListener('click', () => {
+    togglElement(
+        [productDetail, iconArrow, asideTitle, productOrder], 
+        mobileMenu, 
+        desktopMenu, 
+        iconClose,
+        asideProductInfo
+    )
+});
 mobileMenuButton.addEventListener('click', () => {togglElement([mobileMenu], productDetail)});
 
 /*This is a function that creates a new HTML element with the specified tag,
@@ -90,7 +100,7 @@ const renderProducts = (products) => {
         const productName = createElement('p', {}, name);
         const divWrapper = createElement('div',{}, productPrice, productName);
     
-        const addToCard = createElement('img', {src: addCardButton})
+        const addToCard = createElement('img', {src: addCardButton});
         const productFigure = createElement('figure', {}, addToCard);
         
         //<div  class="producto-info"></div>
@@ -98,7 +108,16 @@ const renderProducts = (products) => {
     
         //<div class="product-card">
         const productCard = createElement('div', {class: 'product-card'}, productImg, productInfo);
-        productCard.addEventListener('click', () => {togglElement([productDetail, iconClose], iconArrow, asideTitle, mobileMenu, desktopMenu)})
+        productCard.addEventListener('click', () => {
+            togglElement(
+                [productDetail, iconClose, asideProductInfo], 
+                /* iconArrow, 
+                asideTitle, 
+                mobileMenu, 
+                desktopMenu, */
+                productOrder
+            )
+        });
         cardContainer.append(productCard);        
     }
     /*
