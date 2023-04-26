@@ -8,11 +8,8 @@ const desktopMenu = document.querySelector('.desktop-menu');
 const mobileMenu = document.querySelector('.mobile-menu');
 const productDetail = document.querySelector('.product-detail');
 const cardContainer = document.querySelector('.cards-container');
-const iconArrow = document.querySelector('.icon-arrow');
-const iconClose = document.querySelector('.icone-close');
-const asideTitle =  document.querySelector('.aside-title');
 const asideProductInfo =  document.querySelector('.aside-product-info');
-const productOrder =  document.querySelector('.my-order-content');
+const productOrder =  document.querySelector('.aside-my-order');
 
 const CLASS_HIDDEN = 'hidden';
 
@@ -23,39 +20,25 @@ contains the 'hidden' class. If the element does not contain the class,
 the function adds the 'hidden' class to it.*/
 
 const isHiddenElemnets = (elements) => {
-    
-    for (const key in elements) {
-        if (Object.hasOwnProperty.call(elements, key)) {
-            const element = elements[key];
-            const isHiddenElement = element.classList.contains(CLASS_HIDDEN);
-            console.log(isHiddenElement)
+    elements.forEach(element => {
+        let isHiddenElement = element.classList.contains(CLASS_HIDDEN);
 
-            if(!isHiddenElement) element.classList.add(CLASS_HIDDEN);     
-        }
-    }
+        if(!isHiddenElement) element.classList.add(CLASS_HIDDEN); 
+    })
 }
 
 /*This function takes two parameters: the first parameter to show the element,
 the second parameter hidden the elements*/
-const togglElement = (showElements, ...hiddenElement) => {
-    showElements.forEach(element => {
-        element.classList.toggle(CLASS_HIDDEN);
-    })
-    isHiddenElemnets({...hiddenElement});
+const togglElement = (showElement, hiddenElement) => {
+    console.log('aqui')
+    showElement.classList.toggle(CLASS_HIDDEN);
+    isHiddenElemnets(hiddenElement);
 }
 
 //Events buttons
-navbarEmailButton.addEventListener('click', () => {togglElement([desktopMenu], productDetail)});
-navbarShoppingCardButton.addEventListener('click', () => {
-    togglElement(
-        [productDetail, iconArrow, asideTitle, productOrder], 
-        mobileMenu, 
-        desktopMenu, 
-        iconClose,
-        asideProductInfo
-    )
-});
-mobileMenuButton.addEventListener('click', () => {togglElement([mobileMenu], productDetail)});
+navbarEmailButton.addEventListener('click', () => {togglElement(desktopMenu, productDetail)});
+navbarShoppingCardButton.addEventListener('click', () => {togglElement(productOrder, [mobileMenu, desktopMenu, asideProductInfo])});
+mobileMenuButton.addEventListener('click', () => {togglElement(mobileMenu, productDetail)});
 
 /*This is a function that creates a new HTML element with the specified tag,
 adds attributes to it, and optionally adds content to it.
@@ -108,16 +91,7 @@ const renderProducts = (products) => {
     
         //<div class="product-card">
         const productCard = createElement('div', {class: 'product-card'}, productImg, productInfo);
-        productCard.addEventListener('click', () => {
-            togglElement(
-                [productDetail, iconClose, asideProductInfo], 
-                /* iconArrow, 
-                asideTitle, 
-                mobileMenu, 
-                desktopMenu, */
-                productOrder
-            )
-        });
+        productCard.addEventListener('click', () => {togglElement(asideProductInfo,[mobileMenu, desktopMenu, productOrder])});
         cardContainer.append(productCard);        
     }
     /*

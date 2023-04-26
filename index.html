@@ -108,16 +108,16 @@
     </nav>
 
     <!-- Product details aside -->
-    <aside class="product-detail hidden">
+    
         
-        <div class="title-container">
-            <img class="icon-arrow hidden" src="./icons/arrow.svg" alt="arrow">
-            <img class ="icone-close hidden" src="./icons/icon_close.png" alt="close">
-            <p class="aside-title hidden">My order</p>
-        </div>
+        <aside class="aside-my-order product-detail hidden">
+            <div class="title-container">
+                <img class="icon-arrow" src="./icons/arrow.svg" alt="arrow">
+                <p class="aside-title">My order</p>
+            </div>
             
-        <div class="my-order-content hidden">
-            <div class="shopping-cart">
+            <div class="my-order-content">
+                <div class="shopping-cart">
                 <figure>
                     <img src="./img/Computer.jpg" alt="">
                 </figure>
@@ -138,17 +138,21 @@
                     <p>Computer</p>
                     <p>$50</p>
                 </div>
-            <div class="order">
-                <p>Total</p>
-                <p>$560.00</p>
+                <div class="order">
+                    <p>Total</p>
+                    <p>$560.00</p>
+                </div>
+                
+                <button class="primary-button">
+                    Checkout
+                </button>
             </div>
+    </aside>
 
-            <button class="primary-button">
-                Checkout
-            </button>
-        </div>
- 
-        <div class="aside-product-info hidden">
+        <aside class="aside-product-info product-detail hidden">
+            <div class="title-container">
+                <img class ="icone-close" src="./icons/icon_close.png" alt="close">
+            </div>
             <img src="./img/Computer.jpg" alt="computer">
 
             <p>$50</p>
@@ -160,9 +164,8 @@
                 <img src="./icons/btn_add_to_card.svg" alt="add">
                 Add to cart
             </button>
-        </div>
+        </aside>
         
-    </aside>
     
     <section class="main-container">
         <div class="cards-container">

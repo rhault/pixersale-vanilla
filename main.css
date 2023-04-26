@@ -242,7 +242,7 @@ nav{
     text-align: end;
 }
 
-.product-info > img{
+.aside-product-info > img:nth-child(2){
     border-radius: 0 0 20px 20px;
     height: 360px;
     object-fit: cover;
@@ -253,20 +253,20 @@ nav{
     margin-top: 0;
 }
 
-.aside-product-info p:nth-child(2){
+.aside-product-info p:nth-child(3){
     font-size: var(--md);
     font-weight: bold;
     margin-bottom: 4px;
     
 }
 
-.aside-product-info p:nth-child(3){
+.aside-product-info p:nth-child(4){
     color: var(--very-light-pink);
     font-size: var(--md);
     margin-bottom: 36px;
 }
 
-.aside-product-info p:nth-child(4){
+.aside-product-info p:nth-child(5){
     color: var(--very-light-pink);
     font-size: var(--sm);
     margin-bottom: 36px;
