@@ -1,8 +1,9 @@
 //Constantes
 const navbarEmailButton = document.querySelector('.navbar-email');
 const mobileMenuButton = document.querySelector('.mobile-menu-button');
-const navbarShoppingCardButton = document.querySelector('.navbar-shopping-card');
-const addCardButton = './icons/btn_add_to_card.svg';
+const navbarShoppingCartButton = document.querySelector('.navbar-shopping-card');
+const addCartButton = './icons/btn_add_to_card.svg';
+const closeInfoProductButton = document.querySelector('.icone-close');
 
 const desktopMenu = document.querySelector('.desktop-menu');
 const mobileMenu = document.querySelector('.mobile-menu');
@@ -10,6 +11,8 @@ const productDetail = document.querySelector('.product-detail');
 const cardContainer = document.querySelector('.cards-container');
 const asideProductInfo =  document.querySelector('.aside-product-info');
 const productOrder =  document.querySelector('.aside-my-order');
+const shoppingCartNotification = document.querySelector('.shopping-card-notification'); 
+const myOrderContent = document.querySelector('.my-order-content');
 
 const CLASS_HIDDEN = 'hidden';
 
@@ -19,26 +22,27 @@ const CLASS_HIDDEN = 'hidden';
 contains the 'hidden' class. If the element does not contain the class, 
 the function adds the 'hidden' class to it.*/
 
-const isHiddenElemnets = (elements) => {
+const closeElemnets = (elements) => {
     elements.forEach(element => {
         let isHiddenElement = element.classList.contains(CLASS_HIDDEN);
-
         if(!isHiddenElement) element.classList.add(CLASS_HIDDEN); 
     })
 }
 
-/*This function takes two parameters: the first parameter to show the element,
+/*This function takes two parameters: the first parameter to show or hidden the element,
 the second parameter hidden the elements*/
 const togglElement = (showElement, hiddenElement) => {
-    console.log('aqui')
     showElement.classList.toggle(CLASS_HIDDEN);
-    isHiddenElemnets(hiddenElement);
+    closeElemnets(hiddenElement);
 }
 
-//Events buttons
-navbarEmailButton.addEventListener('click', () => {togglElement(desktopMenu, productDetail)});
-navbarShoppingCardButton.addEventListener('click', () => {togglElement(productOrder, [mobileMenu, desktopMenu, asideProductInfo])});
-mobileMenuButton.addEventListener('click', () => {togglElement(mobileMenu, productDetail)});
+/*This function takes three parameters: the first parameter to show the element, 
+the second parameter is the product data, the third parameter hidden the elements*/
+const openElement = (openElement, product, hiddenElement) => {
+    console.log(product)
+    openElement.classList.remove(CLASS_HIDDEN);
+    closeElemnets(hiddenElement);
+}
 
 /*This is a function that creates a new HTML element with the specified tag,
 adds attributes to it, and optionally adds content to it.
@@ -60,16 +64,52 @@ const createElement = (element, attributes = {}, ...nodes) => {
     return newElement
 }
 
+const addItemCart = (product) => {
+    SHOPPINGCART.push(product);
+    shoppingCartNotification.innerHTML = SHOPPINGCART.length 
+}
+
+//Events buttons
+navbarEmailButton.addEventListener('click', () => {togglElement(desktopMenu, [productDetail])});
+navbarShoppingCartButton.addEventListener('click', () => {togglElement(productOrder, [mobileMenu, desktopMenu, asideProductInfo])});
+mobileMenuButton.addEventListener('click', () => {togglElement(mobileMenu, [productDetail])});
+closeInfoProductButton.addEventListener('click', () => {closeElemnets()});
+
+
 const products = [
-    {name:'Computer', price:300, img:"./img/Computer.jpg"},
-    {name:'Computer', price:300, img:"./img/Computer.jpg"},
-    {name:'Computer', price:300, img:"./img/Computer.jpg"},
-    {name:'Computer', price:300, img:"./img/Computer.jpg"},
-    {name:'Computer', price:300, img:"./img/Computer.jpg"},
-    {name:'Computer', price:300, img:"./img/Computer.jpg"},
-    {name:'Computer', price:300, img:"./img/Computer.jpg"}
+    {name:'Computer 1', price:300, img:"./img/Computer.jpg"},
+    {name:'Computer 2', price:300, img:"./img/Computer.jpg"},
+    {name:'Computer 3', price:300, img:"./img/Computer.jpg"},
+    {name:'Computer 4', price:300, img:"./img/Computer.jpg"},
+    {name:'Computer 5', price:300, img:"./img/Computer.jpg"},
+    {name:'Computer 6', price:300, img:"./img/Computer.jpg"},
+    {name:'Computer 7', price:300, img:"./img/Computer.jpg"}
 ];
 
+let SHOPPINGCART = [];
+
+
+const shoppingCardItens = (SHOPPINGCART) => {
+
+    const {name, price, img} = SHOPPINGCART;
+/* <div class="shopping-cart">
+        <figure>
+            <img src="./img/Computer.jpg" alt="">
+        </figure>
+        <p>Computer</p>
+        <p>$50</p>
+    </div>
+ */
+
+    const productImgIten = createElement('img', {src:img});
+    const productFigureIten = createElement('figure', {}, productImgIten);
+    const productNameIten = createElement('p',{}, name);
+    const productPriceIten = createElement('p',{}, price);
+    const shoppingCartContainer = createElement('div', {class:'shopping-cart'}, productFigureIten, productNameIten, productPriceIten);
+    myOrderContent.insertBefore(shoppingCartContainer, myOrderContent.children[0]);
+}
+
+shoppingCardItens(SHOPPINGCART)
 
 const renderProducts = (products) => {
     for(const product of products){
@@ -77,21 +117,22 @@ const renderProducts = (products) => {
     
         //<img src="url" alt=""></img>
         const productImg = createElement('img',{src:img});
+        productImg.addEventListener('click', () => {openElement(asideProductInfo,product,[mobileMenu, desktopMenu, productOrder])});
     
         
         const productPrice = createElement('p', {}, `$ ${price}`);
         const productName = createElement('p', {}, name);
         const divWrapper = createElement('div',{}, productPrice, productName);
     
-        const addToCard = createElement('img', {src: addCardButton});
-        const productFigure = createElement('figure', {}, addToCard);
+        const addToCart = createElement('img', {src: addCartButton});
+        addToCart.addEventListener('click', () => {addItemCart(product)});
+        const productFigure = createElement('figure', {}, addToCart);
         
         //<div  class="producto-info"></div>
         const productInfo = createElement('div',{class:'producto-info'}, divWrapper, productFigure);
     
         //<div class="product-card">
         const productCard = createElement('div', {class: 'product-card'}, productImg, productInfo);
-        productCard.addEventListener('click', () => {togglElement(asideProductInfo,[mobileMenu, desktopMenu, productOrder])});
         cardContainer.append(productCard);        
     }
     /*
