@@ -12,7 +12,7 @@ const cardContainer = document.querySelector('.cards-container');
 const asideProductInfo =  document.querySelector('.aside-product-info');
 const productOrder =  document.querySelector('.aside-my-order');
 const shoppingCartNotification = document.querySelector('.shopping-card-notification'); 
-const myOrderContent = document.querySelector('.my-order-content');
+const ItemsContainer = document.querySelector('.items-container');
 
 const CLASS_HIDDEN = 'hidden';
 
@@ -66,14 +66,17 @@ const createElement = (element, attributes = {}, ...nodes) => {
 
 const addItemCart = (product) => {
     SHOPPINGCART.push(product);
-    shoppingCartNotification.innerHTML = SHOPPINGCART.length 
+    shoppingCartNotification.innerHTML = SHOPPINGCART.length;
+    ItemsContainer.innerHTML = '';
+    shoppingCardItems(SHOPPINGCART); 
 }
+
 
 //Events buttons
 navbarEmailButton.addEventListener('click', () => {togglElement(desktopMenu, [productDetail])});
 navbarShoppingCartButton.addEventListener('click', () => {togglElement(productOrder, [mobileMenu, desktopMenu, asideProductInfo])});
-mobileMenuButton.addEventListener('click', () => {togglElement(mobileMenu, [productDetail])});
-closeInfoProductButton.addEventListener('click', () => {closeElemnets()});
+mobileMenuButton.addEventListener('click', () => {togglElement(mobileMenu, [productDetail, asideProductInfo])});
+closeInfoProductButton.addEventListener('click', () => {closeElemnets([asideProductInfo])});
 
 
 const products = [
@@ -89,27 +92,28 @@ const products = [
 let SHOPPINGCART = [];
 
 
-const shoppingCardItens = (SHOPPINGCART) => {
+const shoppingCardItems = (items) => {
+    for (const item of items) {
+        
+        const {name, price, img} = item;
+        
+        const productImgitem = createElement('img', {src:img});
+        const productFigureitem = createElement('figure', {}, productImgitem);
+        const productNameitem = createElement('p',{}, name);
+        const productPriceitem = createElement('p',{}, price);
+        const shoppingCartContainer = createElement('div', {class:'shopping-cart'}, productFigureitem, productNameitem, productPriceitem);
+        ItemsContainer.appendChild(shoppingCartContainer);
+    }
 
-    const {name, price, img} = SHOPPINGCART;
-/* <div class="shopping-cart">
+    /* <div class="shopping-cart">
         <figure>
-            <img src="./img/Computer.jpg" alt="">
+        <img src="./img/Computer.jpg" alt="">
         </figure>
         <p>Computer</p>
         <p>$50</p>
-    </div>
- */
-
-    const productImgIten = createElement('img', {src:img});
-    const productFigureIten = createElement('figure', {}, productImgIten);
-    const productNameIten = createElement('p',{}, name);
-    const productPriceIten = createElement('p',{}, price);
-    const shoppingCartContainer = createElement('div', {class:'shopping-cart'}, productFigureIten, productNameIten, productPriceIten);
-    myOrderContent.insertBefore(shoppingCartContainer, myOrderContent.children[0]);
+        </div>
+    */
 }
-
-shoppingCardItens(SHOPPINGCART)
 
 const renderProducts = (products) => {
     for(const product of products){

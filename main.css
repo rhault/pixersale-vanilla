@@ -140,9 +140,11 @@ nav{
     display: grid;
     justify-content: space-between;
     height: 100vh;
+    left: 0;
     padding: 24px;
     position: absolute;
     top: 80px;
+    width: 90%;
 }
 
 .mobile-menu ul{
