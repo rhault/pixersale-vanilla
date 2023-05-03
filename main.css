@@ -5,6 +5,7 @@
     --very-light-text: #766d6d;
     --text-input-field: #F7F7F7;
     --hospital-green: #ACD9B2;
+    --remove: red;
     --sm: 16px;
     --md: 18px;
     --lg: 20px
@@ -305,6 +306,13 @@ nav{
 .shopping-cart p:nth-child(3){
     font-weight: bold;
     font-size: var(--md);
+}
+
+.shopping-cart span{
+    color: var(--remove);
+    font-weight: bold;  
+    font-size: 40px;
+    margin-bottom: 4px;
 }
 
 .primary-button{

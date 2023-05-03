@@ -71,6 +71,14 @@ const addItemCart = (product) => {
     shoppingCardItems(SHOPPINGCART); 
 }
 
+const removeItemCart = (product) => {
+    
+    let indexRemoveItem = SHOPPINGCART.findIndex(element => element == product);
+    shoppingCartNotification.innerHTML = SHOPPINGCART.length;
+    ItemsContainer.innerHTML = '';
+    shoppingCardItems(SHOPPINGCART); 
+}
+
 
 //Events buttons
 navbarEmailButton.addEventListener('click', () => {togglElement(desktopMenu, [productDetail])});
@@ -101,7 +109,9 @@ const shoppingCardItems = (items) => {
         const productFigureitem = createElement('figure', {}, productImgitem);
         const productNameitem = createElement('p',{}, name);
         const productPriceitem = createElement('p',{}, price);
-        const shoppingCartContainer = createElement('div', {class:'shopping-cart'}, productFigureitem, productNameitem, productPriceitem);
+        const removeProductItem = createElement('span',{}, '-');
+        removeProductItem.addEventListener('click',() => {removeItemCart(item)} )
+        const shoppingCartContainer = createElement('div', {class:'shopping-cart'}, productFigureitem, productNameitem, productPriceitem, removeProductItem);
         ItemsContainer.appendChild(shoppingCartContainer);
     }
 
@@ -111,6 +121,7 @@ const shoppingCardItems = (items) => {
         </figure>
         <p>Computer</p>
         <p>$50</p>
+        <p>-</p>
         </div>
     */
 }
