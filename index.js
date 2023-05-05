@@ -74,6 +74,7 @@ const addItemCart = (product) => {
 const removeItemCart = (product) => {
     
     let indexRemoveItem = SHOPPINGCART.findIndex(element => element == product);
+    SHOPPINGCART.splice(indexRemoveItem,1)
     shoppingCartNotification.innerHTML = SHOPPINGCART.length;
     ItemsContainer.innerHTML = '';
     shoppingCardItems(SHOPPINGCART); 
